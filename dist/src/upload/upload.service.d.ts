@@ -3,6 +3,7 @@ export declare class UploadService {
     private readonly prisma;
     constructor(prisma: PrismaService);
     create(file: Express.Multer.File, userId?: string): Promise<{
+        url: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
@@ -10,7 +11,6 @@ export declare class UploadService {
         originalname: string;
         mimetype: string;
         size: number;
-        url: string;
         uploadedById: string | null;
     }>;
     findAll(page?: number, limit?: number): Promise<{
@@ -20,6 +20,7 @@ export declare class UploadService {
                 name: string;
             } | null;
         } & {
+            url: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
@@ -27,7 +28,6 @@ export declare class UploadService {
             originalname: string;
             mimetype: string;
             size: number;
-            url: string;
             uploadedById: string | null;
         })[];
         total: number;
@@ -35,6 +35,7 @@ export declare class UploadService {
         limit: number;
     }>;
     remove(id: string): Promise<{
+        url: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
@@ -42,7 +43,6 @@ export declare class UploadService {
         originalname: string;
         mimetype: string;
         size: number;
-        url: string;
         uploadedById: string | null;
     }>;
 }

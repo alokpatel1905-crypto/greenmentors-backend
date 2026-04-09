@@ -15,8 +15,8 @@ export declare class AnalyticsService {
             views: number;
         }[];
         dailyViews: {
-            id: string;
             url: string;
+            id: string;
             date: Date;
             hits: number;
         }[];
@@ -107,8 +107,8 @@ export declare class AnalyticsService {
         })[];
     }>;
     trackView(url: string): Promise<{
-        id: string;
         url: string;
+        id: string;
         date: Date;
         hits: number;
     }>;

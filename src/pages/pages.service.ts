@@ -7,39 +7,39 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class PagesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async create(data: {
-  title: string;
-  slug: string;
-  content?: any;
-  image?: string;
-  status?: 'DRAFT' | 'PUBLISHED';
-}) {
-  const existing = await this.prisma.page.findUnique({
-    where: { slug: data.slug },
-  });
+    title: string;
+    slug: string;
+    content?: any;
+    image?: string;
+    status?: 'DRAFT' | 'PUBLISHED';
+  }) {
+    const existing = await this.prisma.page.findUnique({
+      where: { slug: data.slug },
+    });
 
-  if (existing) {
-    throw new BadRequestException('Slug already exists');
-  }
+    if (existing) {
+      throw new BadRequestException('Slug already exists');
+    }
 
-  return this.prisma.page.create({
-    data: {
-      title: data.title,
-      slug: data.slug,
-      content: data.content,
-      image: data.image,
-      status: data.status || 'DRAFT',
-      histories: {
-        create: {
-          content: data.content,
-          editedBy: 'admin', // Placeholder until auth is wired
+    return this.prisma.page.create({
+      data: {
+        title: data.title,
+        slug: data.slug,
+        content: data.content,
+        image: data.image,
+        status: data.status || 'DRAFT',
+        histories: {
+          create: {
+            content: data.content,
+            editedBy: 'admin', // Placeholder until auth is wired
+          }
         }
-      }
-    },
-  });
-}
+      },
+    });
+  }
 
   async findAll() {
     return this.prisma.page.findMany({
@@ -132,30 +132,30 @@ export class PagesService {
   }
 
   async remove(id: string) {
-  const page = await this.prisma.page.findUnique({
-    where: { id },
-  });
+    const page = await this.prisma.page.findUnique({
+      where: { id },
+    });
 
-  if (!page) {
-    throw new NotFoundException('Page not found');
-  }
-
-  return this.prisma.page.update({
-    where: { id },
-    data: {
-      isActive: false,
-    },
-  });
+    if (!page) {
+      throw new NotFoundException('Page not found');
     }
+
+    return this.prisma.page.update({
+      where: { id },
+      data: {
+        isActive: false,
+      },
+    });
+  }
 
   async findById(id: string) {
     const page = await this.prisma.page.findUnique({
       where: { id },
-  });
+    });
 
     if (!page) {
       throw new NotFoundException('Page not found');
-  }
+    }
 
     return page;
   }

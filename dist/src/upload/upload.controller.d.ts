@@ -3,6 +3,7 @@ export declare class UploadController {
     private readonly uploadService;
     constructor(uploadService: UploadService);
     uploadFile(file: Express.Multer.File, req: any): Promise<{
+        url: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
@@ -10,7 +11,6 @@ export declare class UploadController {
         originalname: string;
         mimetype: string;
         size: number;
-        url: string;
         uploadedById: string | null;
     }>;
     findAll(page?: string, limit?: string): Promise<{
@@ -20,6 +20,7 @@ export declare class UploadController {
                 name: string;
             } | null;
         } & {
+            url: string;
             id: string;
             createdAt: Date;
             updatedAt: Date;
@@ -27,7 +28,6 @@ export declare class UploadController {
             originalname: string;
             mimetype: string;
             size: number;
-            url: string;
             uploadedById: string | null;
         })[];
         total: number;
@@ -35,6 +35,7 @@ export declare class UploadController {
         limit: number;
     }>;
     remove(id: string): Promise<{
+        url: string;
         id: string;
         createdAt: Date;
         updatedAt: Date;
@@ -42,7 +43,6 @@ export declare class UploadController {
         originalname: string;
         mimetype: string;
         size: number;
-        url: string;
         uploadedById: string | null;
     }>;
 }
