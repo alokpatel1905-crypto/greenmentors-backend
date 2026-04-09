@@ -5,7 +5,7 @@ export declare class PagesService {
     create(data: {
         title: string;
         slug: string;
-        content?: string;
+        content?: any;
         image?: string;
         status?: 'DRAFT' | 'PUBLISHED';
     }): Promise<{
@@ -21,7 +21,7 @@ export declare class PagesService {
         schemaMarkup: string | null;
         createdAt: Date;
         updatedAt: Date;
-        content: string | null;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
     }>;
     findAll(): Promise<{
         id: string;
@@ -36,7 +36,7 @@ export declare class PagesService {
         schemaMarkup: string | null;
         createdAt: Date;
         updatedAt: Date;
-        content: string | null;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
     }[]>;
     findPublished(): Promise<{
         id: string;
@@ -51,7 +51,7 @@ export declare class PagesService {
         schemaMarkup: string | null;
         createdAt: Date;
         updatedAt: Date;
-        content: string | null;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
     }[]>;
     findPublishedBySlug(slug: string): Promise<{
         id: string;
@@ -66,7 +66,7 @@ export declare class PagesService {
         schemaMarkup: string | null;
         createdAt: Date;
         updatedAt: Date;
-        content: string | null;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
     }>;
     findBySlug(slug: string): Promise<{
         id: string;
@@ -81,12 +81,12 @@ export declare class PagesService {
         schemaMarkup: string | null;
         createdAt: Date;
         updatedAt: Date;
-        content: string | null;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
     }>;
     update(id: string, data: {
         title?: string;
         slug?: string;
-        content?: string;
+        content?: any;
         image?: string;
         status?: 'DRAFT' | 'PUBLISHED';
         isActive?: boolean;
@@ -103,7 +103,7 @@ export declare class PagesService {
         schemaMarkup: string | null;
         createdAt: Date;
         updatedAt: Date;
-        content: string | null;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
     }>;
     remove(id: string): Promise<{
         id: string;
@@ -118,7 +118,7 @@ export declare class PagesService {
         schemaMarkup: string | null;
         createdAt: Date;
         updatedAt: Date;
-        content: string | null;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
     }>;
     findById(id: string): Promise<{
         id: string;
@@ -133,6 +133,13 @@ export declare class PagesService {
         schemaMarkup: string | null;
         createdAt: Date;
         updatedAt: Date;
-        content: string | null;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
     }>;
+    getHistory(id: string): Promise<{
+        id: string;
+        createdAt: Date;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
+        editedBy: string | null;
+        pageId: string;
+    }[]>;
 }

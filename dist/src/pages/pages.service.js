@@ -31,6 +31,12 @@ let PagesService = class PagesService {
                 content: data.content,
                 image: data.image,
                 status: data.status || 'DRAFT',
+                histories: {
+                    create: {
+                        content: data.content,
+                        editedBy: 'admin',
+                    }
+                }
             },
         });
     }
@@ -90,7 +96,15 @@ let PagesService = class PagesService {
         }
         return this.prisma.page.update({
             where: { id },
-            data,
+            data: {
+                ...data,
+                histories: data.content ? {
+                    create: {
+                        content: data.content,
+                        editedBy: 'admin',
+                    }
+                } : undefined
+            },
         });
     }
     async remove(id) {
@@ -115,6 +129,12 @@ let PagesService = class PagesService {
             throw new common_1.NotFoundException('Page not found');
         }
         return page;
+    }
+    async getHistory(id) {
+        return this.prisma.pageHistory.findMany({
+            where: { pageId: id },
+            orderBy: { createdAt: 'desc' },
+        });
     }
 };
 exports.PagesService = PagesService;

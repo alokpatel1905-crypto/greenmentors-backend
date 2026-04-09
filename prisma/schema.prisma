@@ -359,7 +359,7 @@ model Page {
   id        String     @id @default(cuid())
   title     String
   slug      String     @unique
-  content   String?
+  content   Json?
   image     String?
   status    PageStatus @default(DRAFT)
   isActive  Boolean    @default(true)
@@ -369,6 +369,17 @@ model Page {
   schemaMarkup    String?
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+
+  histories PageHistory[]
+}
+
+model PageHistory {
+  id        String   @id @default(cuid())
+  pageId    String
+  page      Page     @relation(fields: [pageId], references: [id])
+  content   Json?
+  editedBy  String?
+  createdAt DateTime @default(now())
 }
 
 model PageView {

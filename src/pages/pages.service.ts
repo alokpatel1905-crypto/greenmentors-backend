@@ -12,7 +12,7 @@ export class PagesService {
   async create(data: {
   title: string;
   slug: string;
-  content?: string;
+  content?: any;
   image?: string;
   status?: 'DRAFT' | 'PUBLISHED';
 }) {
@@ -31,6 +31,12 @@ export class PagesService {
       content: data.content,
       image: data.image,
       status: data.status || 'DRAFT',
+      histories: {
+        create: {
+          content: data.content,
+          editedBy: 'admin', // Placeholder until auth is wired
+        }
+      }
     },
   });
 }
@@ -84,7 +90,7 @@ export class PagesService {
     data: {
       title?: string;
       slug?: string;
-      content?: string;
+      content?: any;
       image?: string;
       status?: 'DRAFT' | 'PUBLISHED';
       isActive?: boolean;
@@ -113,7 +119,15 @@ export class PagesService {
 
     return this.prisma.page.update({
       where: { id },
-      data,
+      data: {
+        ...data,
+        histories: data.content ? {
+          create: {
+            content: data.content,
+            editedBy: 'admin',
+          }
+        } : undefined
+      },
     });
   }
 
@@ -144,5 +158,12 @@ export class PagesService {
   }
 
     return page;
+  }
+
+  async getHistory(id: string) {
+    return this.prisma.pageHistory.findMany({
+      where: { pageId: id },
+      orderBy: { createdAt: 'desc' },
+    });
   }
 }

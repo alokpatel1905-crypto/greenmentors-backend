@@ -39,7 +39,7 @@ export declare class SeoController {
         schemaMarkup: string | null;
         createdAt: Date;
         updatedAt: Date;
-        content: string | null;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
     }>;
     updateProgramSeo(id: string, body: any): Promise<{
         id: string;

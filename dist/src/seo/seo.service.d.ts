@@ -33,7 +33,7 @@ export declare class SeoService {
         schemaMarkup: string | null;
         createdAt: Date;
         updatedAt: Date;
-        content: string | null;
+        content: import("@prisma/client/runtime/client").JsonValue | null;
     }>;
     updateProgramSeo(id: string, data: {
         metaTitle?: string;
