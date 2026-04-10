@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import * as fs from 'fs';
 
 @Injectable()
 export class PagesService {
@@ -16,6 +17,7 @@ export class PagesService {
     image?: string;
     status?: 'DRAFT' | 'PUBLISHED';
   }) {
+    try {
     const existing = await this.prisma.page.findUnique({
       where: { slug: data.slug },
     });
@@ -39,6 +41,10 @@ export class PagesService {
         }
       },
     });
+    } catch (error: any) {
+      fs.appendFileSync('error.log', `${new Date().toISOString()} ERROR in create: ${error.message}\n${error.stack}\n`);
+      throw error;
+    }
   }
 
   async findAll() {

@@ -9,8 +9,8 @@ export declare class PublicationsController {
         status: string;
         createdAt: Date;
         updatedAt: Date;
-        type: import("@prisma/client").$Enums.PublicationType;
         content: string | null;
+        type: import("@prisma/client").$Enums.PublicationType;
         fileUrl: string | null;
         author: string | null;
     }>;
@@ -22,8 +22,8 @@ export declare class PublicationsController {
             status: string;
             createdAt: Date;
             updatedAt: Date;
-            type: import("@prisma/client").$Enums.PublicationType;
             content: string | null;
+            type: import("@prisma/client").$Enums.PublicationType;
             fileUrl: string | null;
             author: string | null;
         }[];
@@ -38,8 +38,8 @@ export declare class PublicationsController {
         status: string;
         createdAt: Date;
         updatedAt: Date;
-        type: import("@prisma/client").$Enums.PublicationType;
         content: string | null;
+        type: import("@prisma/client").$Enums.PublicationType;
         fileUrl: string | null;
         author: string | null;
     }>;
@@ -50,8 +50,8 @@ export declare class PublicationsController {
         status: string;
         createdAt: Date;
         updatedAt: Date;
-        type: import("@prisma/client").$Enums.PublicationType;
         content: string | null;
+        type: import("@prisma/client").$Enums.PublicationType;
         fileUrl: string | null;
         author: string | null;
     }>;
